@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>PHP Test</title>
+        <title>Potrero Digital - Tarea Nº 1</title>
     </head>
     <body>
         <?php
             echo "1)";
+            
             echo "<p>Hola Mundo</p>";
             
             echo "2)";
+            
             $holaMundo = "<p>Hola Mundo !!!</p>";
             echo $holaMundo;
             
             echo "3)";
+            
             $int_a = 7;
             $int_b = 5;
             echo "<p>$int_a + $int_b = ";
@@ -36,11 +39,13 @@
             echo "</p>";
 
             echo "4)";
+            
             $gradosCentigrados = 20;
             $gradosFahrenheit = ($gradosCentigrados * (9 / 5)) + 32;
             echo "<p>$gradosCentigrados grados centígrados = $gradosFahrenheit grados fahrenheit</p>";
             
             echo "5)";
+            
             $rectBase = 18;
             $rectAltura = 12;
             $perimetroRect = 2 * $rectAltura + 2 * $rectBase;
