@@ -8,7 +8,7 @@
 <body>
     <?php
         $n_1 = 3;
-        echo "<strong>\$n_1 = 3</strong>";
+        echo "<strong>\$n_1 = $n_1</strong>";
         
         if ($n_1 > 0) {
             echo "<p>$n_1 es un número positivo</p>";
@@ -19,7 +19,7 @@
         }
 
         $n_2 = -7;
-        echo "<strong>\$n_2 = -7</strong>";
+        echo "<strong>\$n_2 = $n_2</strong>";
         
         if ($n_2 > 0) {
             echo "<p>$n_2 es un número positivo</p>";
@@ -30,7 +30,7 @@
         }
 
         $n_3 = 0;
-        echo "<strong>\$n_3 = 0</strong>";
+        echo "<strong>\$n_3 = $n_3</strong>";
         
         if ($n_3 > 0) {
             echo "<p>$n_3 es un número positivo</p>";
@@ -43,7 +43,7 @@
         echo "<hr />";
 
         $n_4 = 5;
-        echo "<strong>\$n_4 = 5</strong>";
+        echo "<strong>\$n_4 = $n_4</strong>";
         
         if ($n_4 > 10 || $n_4 < 2) {
             echo "<p>$n_4 es mayor que 10 <strong>o</strong> menor que 2</p>";
@@ -52,7 +52,7 @@
         }
 
         $n_5 = 1;
-        echo "<strong>\$n_5 = 1</strong>";
+        echo "<strong>\$n_5 = $n_5</strong>";
         
         if ($n_5 > 10 || $n_5 < 2) {
             echo "<p>$n_5 es mayor que 10 <strong>o</strong> menor que 2</p>";
@@ -61,7 +61,7 @@
         }
 
         $n_6 = 13;
-        echo "<strong>\$n_6 = 13</strong>";
+        echo "<strong>\$n_6 = $n_6</strong>";
         
         if ($n_6 > 10 || $n_6 < 2) {
             echo "<p>$n_6 es mayor que 10 <strong>o</strong> menor que 2</p>";
