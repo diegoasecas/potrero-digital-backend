@@ -73,7 +73,7 @@
 
         $numero_1 = 3;
         $numero_2 = 7;
-        echo "<strong>\$numero_1 = 3; \$numero_2 = 7</strong>";
+        echo "<strong>\$numero_1 = $numero_1; \$numero_2 = $numero_2</strong>";
         
         if ($numero_1 == $numero_2) {
             echo "los números ingresados son iguales";
@@ -101,7 +101,7 @@
 
         $numero_3 = 9;
         $numero_4 = 4;
-        echo "<strong>\$numero_3 = 9; \$numero_4 = 4</strong>";
+        echo "<strong>\$numero_3 = $numero_3; \$numero_4 = $numero_4</strong>";
         
         if ($numero_3 == $numero_4) {
             echo "los números ingresados son iguales";
@@ -124,6 +124,34 @@
 
             echo "<p>el resto de dividir $numero_3 por $numero_4 = ";
             echo $numero_3 % $numero_4;
+            echo "</p>";
+        }
+
+        $numero_5 = 7;
+        $numero_6 = 7;
+        echo "<strong>\$numero_5 = $numero_5; \$numero_6 = $numero_6</strong>";
+        
+        if ($numero_5 == $numero_6) {
+            echo "<p>los números ingresados son iguales</p>";
+        } elseif ($numero_5 > $numero_6) {
+            echo "<p>$numero_5 mas $numero_6 = ";
+            echo $numero_5 + $numero_6;
+            echo "</p>";
+
+            echo "<p>$numero_5 menos $numero_6 = ";
+            echo $numero_5 - $numero_6;
+            echo "</p>";
+        } else {
+            echo "<p>el producto de $numero_5 por $numero_6 = ";
+            echo $numero_5 * $numero_6;
+            echo "</p>";
+
+            echo "<p>$numero_5 dividido $numero_6 = ";
+            echo intdiv($numero_5, $numero_6);
+            echo "</p>";
+
+            echo "<p>el resto de dividir $numero_5 por $numero_6 = ";
+            echo $numero_5 % $numero_6;
             echo "</p>";
         }
     ?>
