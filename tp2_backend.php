@@ -3,7 +3,7 @@
 <head>
     <meta charset= "UTF-8">
     <meta name= "viewport" content= "width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Trabajo Práctico N° 3</title>
 </head>
 <body>
     <?php
@@ -73,7 +73,7 @@
 
         $numero_1 = 3;
         $numero_2 = 7;
-        echo "<strong>\$numero_1 = 3, \$numero_2 = 7</strong>";
+        echo "<strong>\$numero_1 = 3; \$numero_2 = 7</strong>";
         
         if ($numero_1 == $numero_2) {
             echo "los números ingresados son iguales";
@@ -126,16 +126,6 @@
             echo $numero_3 % $numero_4;
             echo "</p>";
         }
-/* 
-
-        
-3. Crear una variable n y validar que sea un número mayor a 10 o menor a 2.
-4. Crear dos variables, una con nombre numero1 y otra con el nombre de numero2. Si numero1 es
-mayor a numero2, mostrar por pantalla, la suma y la resta. Si numero2 es mayor a numero1,
-mostrar por pantalla la multiplicación, la división entera y el resto de la división. Si numero
-
- */
-
     ?>
 </body>
 </html>
