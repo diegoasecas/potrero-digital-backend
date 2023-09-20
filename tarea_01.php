@@ -60,5 +60,6 @@
             
             echo "<p>El perímetro de un círculo de radio 30 cm es de $perimetroCirc cm, y su área es de $areaCirc cm²</p>";
         ?>
+    <!-- comment for testing purposes -->
     </body>
 </html>
