@@ -1,0 +1,18 @@
+.card {
+  width: 40%;
+  margin: 0 auto; /* Center the card horizontally */
+}
+
+@media (max-width: 750px) {
+  .card {
+      width: 80%;
+  }
+}
+
+body {
+  background-color: lightblue;
+}
+
+.error {
+  background-color:lightsalmon;
+}
