@@ -12,17 +12,17 @@
     <div class="container">
     
         <!-- fila 1 -->
-        <div class="cell"></div>
+        <div></div>
         
-        <div class="cell">
+        <div>
             <h2>for</h2>
         </div>
         
-        <div class="cell">
+        <div>
             <h2>while</h2>
         </div>
         
-        <div class="cell">
+        <div>
             <h2>do ... while</h2>
         </div>
 
@@ -32,7 +32,7 @@
         <div class="cell cell-title">1. Mostrar los números del 1 al 100</div>
         
         <!-- for -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">
@@ -54,7 +54,7 @@
         </div>
         
         <!-- while -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">
@@ -81,7 +81,7 @@
         </div>
   
         <!-- do ... while -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">
@@ -113,7 +113,7 @@
         <div class="cell cell-title">2) Mostrar los números del 100 al 1</div>
         
         <!-- for -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">
@@ -135,7 +135,7 @@
         </div>
         
         <!-- while -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">
@@ -162,7 +162,7 @@
         </div>
   
         <!-- do ... while -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">
@@ -194,7 +194,7 @@
         <div class="cell cell-title">3) Mostrar los números pares del 1 al 100</div>
         
         <!-- for -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">
@@ -220,7 +220,7 @@
         </div>
         
         <!-- while -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">
@@ -251,7 +251,7 @@
         </div>
   
         <!-- do ... while -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">
@@ -287,7 +287,7 @@
         <div class="cell cell-title">4) Mostrar los números impares del 1 al 100</div>
         
         <!-- for -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">
@@ -313,7 +313,7 @@
         </div>
         
         <!-- while -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">
@@ -344,7 +344,7 @@
         </div>
   
         <!-- do ... while -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">
@@ -380,7 +380,7 @@
         <div class="cell cell-title">5) Mostrar la suma de los números de 1 a 20</div>
         
         <!-- for -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">
@@ -411,7 +411,7 @@
         </div>
         
         <!-- while -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">
@@ -446,7 +446,7 @@
         </div>
   
         <!-- do ... while -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">
@@ -486,7 +486,7 @@
         <div class="cell cell-title">6) Mostrar la suma de los números pares de 1 a 20</div>
         
         <!-- for -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">
@@ -520,7 +520,7 @@
         </div>
         
         <!-- while -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">
@@ -559,7 +559,7 @@
         </div>
   
         <!-- do ... while -->
-        <div class="cell">
+        <div>
             <div class="cell-title">Código:</div>
             
             <div class="code">

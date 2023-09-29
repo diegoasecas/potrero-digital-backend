@@ -1,5 +1,6 @@
 html {
-    border-top: 15px solid #859f6e;
+    border-top: 2px solid #859f6e;
+    border-bottom: 10px solid #859f6e;
 }
 
 body {
@@ -23,10 +24,6 @@ h2 {
     display: grid;
     grid-template-columns: 1fr 2fr 2fr 2fr;
     grid-gap: 25px;
-}
-
-.cell {
-    background-color: #fff;
 }
 
 .code {
