@@ -110,7 +110,7 @@
 
         <!-- fila 3 -->
         <!-- consigna -->
-        <div class="cell cell-title">2) Mostrar los números del 100 al 1</div>
+        <div class="cell cell-title">2. Mostrar los números del 100 al 1</div>
         
         <!-- for -->
         <div>
@@ -191,7 +191,7 @@
 
         <!-- fila 4 -->        
         <!-- consigna -->
-        <div class="cell cell-title">3) Mostrar los números pares del 1 al 100</div>
+        <div class="cell cell-title">3. Mostrar los números pares del 1 al 100</div>
         
         <!-- for -->
         <div>
@@ -284,7 +284,7 @@
 
         <!-- fila 5 -->        
         <!-- consigna -->
-        <div class="cell cell-title">4) Mostrar los números impares del 1 al 100</div>
+        <div class="cell cell-title">4. Mostrar los números impares del 1 al 100</div>
         
         <!-- for -->
         <div>
@@ -377,7 +377,7 @@
 
         <!-- fila 6 -->        
         <!-- consigna -->
-        <div class="cell cell-title">5) Mostrar la suma de los números de 1 a 20</div>
+        <div class="cell cell-title">5. Mostrar la suma de los números de 1 a 20</div>
         
         <!-- for -->
         <div>
@@ -483,7 +483,7 @@
 
         <!-- fila 7 -->        
         <!-- consigna -->
-        <div class="cell cell-title">6) Mostrar la suma de los números pares de 1 a 20</div>
+        <div class="cell cell-title">6. Mostrar la suma de los números pares de 1 a 20</div>
         
         <!-- for -->
         <div>
