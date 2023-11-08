@@ -26,7 +26,7 @@
             $data_1 = mysqli_query($connection, $query_1);
             
             
-            // 4) el while recorre todos los registros y genera una CARD PARA CADA UNA
+            // recorrer los registros segun condicion
             while ($reg_1 = mysqli_fetch_array($data_1)) {
                 ?>
 
@@ -46,7 +46,7 @@
             $data_2 = mysqli_query($connection, $query_2);
             
             
-            // 4) el while recorre todos los registros y genera una CARD PARA CADA UNA
+            // recorrer los registros segun condicion
             while ($reg_2 = mysqli_fetch_array($data_2)) {
                 ?>
 
@@ -66,7 +66,7 @@
             $data_3 = mysqli_query($connection, $query_3);
             
 
-            // 4) el while recorre todos los registros y genera una CARD PARA CADA UNA
+            // recorrer los registros segun condicion
             while ($reg_3 = mysqli_fetch_array($data_3)) {
                 ?>
 
@@ -86,7 +86,7 @@
             $data_4 = mysqli_query($connection, $query_4);
             
 
-            // 4) el while recorre todos los registros y genera una CARD PARA CADA UNA
+            // recorrer los registros segun condicion
             while ($reg_4 = mysqli_fetch_array($data_4)) {
                 ?>
 
