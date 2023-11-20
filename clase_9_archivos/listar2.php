@@ -26,7 +26,7 @@
     </tr>
     <?php
     // 1) Conexion
-    $conexion = mysqli_connect("127.0.0.1", "root", "");
+    $conexion = mysqli_connect("127.0.0.1", "root", "databased69");
     mysqli_select_db($conexion, "tienda");
 
 
