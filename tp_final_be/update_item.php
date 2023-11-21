@@ -3,7 +3,19 @@
 <?php
 session_start();
 require_once('db_connection.php');
+?>
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<?php
 // Check if the 'id' parameter is set in the URL
 if (isset($_GET['id'])) {
     $item_id = $_GET['id'];
@@ -74,3 +86,7 @@ if (isset($_GET['id'])) {
 ?>
 
 <!-- TODO: Add a form with pre-filled values for updating the item -->
+
+    
+</body>
+</html>
