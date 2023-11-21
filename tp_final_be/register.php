@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $password = $_POST['password'];
 
-    // inserta nuevo usuario en la tabla 'users'
+    // inserta nuevo usuario en la tabla 'users' con los param especificados
     $query = "INSERT INTO users (username, name, password) VALUES ('$user_name', '$name', '$password')";
     $result = $conn->query($query);
 

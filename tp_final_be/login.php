@@ -23,7 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['is_admin'] = $user['admin'] == 1;
 
         // redirige a la pag ppal
-        header("Location: index.php"); 
+        header("Refresh:3; url=index.php");
+        echo "<h2>Login exitoso!</h2>";
+        echo "<p class=''>Bienvenido, " . $_SESSION['name'] . "! En 3 segundos será redirigido a la página principal.</p>";
         exit();
     } else {
         // si no coinciden muestra error y redirige a la pag ppal

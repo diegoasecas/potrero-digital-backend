@@ -77,10 +77,6 @@ if (isset($_SESSION['user_id'])) {
     } else {
         echo '<p>No items available.</p>';
     }
-
-    
-
-// TODO: Add any additional HTML content or links
 ?>
 
 </body>

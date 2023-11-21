@@ -28,16 +28,17 @@ if (isset($_GET['id'])) {
             $delete_result = $conn->query($delete_query);
 
             if ($delete_result) {
-                echo "Item deleted successfully!";
+                echo "Item eliminado con éxito! En 5 segundos será redirigido a la página principal";
+                header('Refresh:5; url=index.php');
             } else {
-                echo "Error deleting item: " . $conn->error;
+                echo "Error eliminando item: " . $conn->error;
             }
         }
 
     } else {
-        echo 'Item not found';
+        echo 'Item no encontrado';
     }
 } else {
-    echo 'Invalid request';
+    echo 'Petición inválida';
 }
 ?>

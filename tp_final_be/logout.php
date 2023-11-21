@@ -1,12 +1,13 @@
 <?php
 session_start();
 
-// Unset all session variables
+// desasigna las variables de sesion
 $_SESSION = array();
 
-// Destroy the session
+// elimina la sesion
 session_destroy();
 
-header("Location: index.php"); // Redirect to landing page after logout
+// redirige a la pag ppal
+header("Location: index.php");
 exit();
 ?>
