@@ -1,6 +1,6 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
 error_reporting(E_ALL);
 
 
@@ -12,18 +12,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $password = $_POST['password'];
 
-    // TODO: Validate and sanitize inputs (for a real-world scenario)
-
-    // Insert new user into the 'users' table
+    // inserta nuevo usuario en la tabla 'users'
     $query = "INSERT INTO users (username, name, password) VALUES ('$user_name', '$name', '$password')";
     $result = $conn->query($query);
 
     if ($result) {
-        echo "Registration successful!";
+        header("refresh:5; url=index.php");
+        echo "Registro exitoso! En 5 segundos será dirigido a la página principal";
     } else {
-        echo "Error: " . $conn->error;
+        header("refresh:5; url=index.php");
+        echo "Error de registro. En 5 segundos será redirigido a la página principal. Código del error: " . $conn->error;
     }
 }
-
-// TODO: Redirect or display registration form on failure
 ?>

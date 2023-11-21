@@ -41,5 +41,3 @@ if (isset($_GET['id'])) {
     echo 'Invalid request';
 }
 ?>
-
-<!-- TODO: Add confirmation message and delete button -->
