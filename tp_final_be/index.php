@@ -1,5 +1,3 @@
-<!-- index.php -->
-
 <?php
 session_start();
 require_once('db_connection.php');
@@ -17,13 +15,10 @@ echo '</pre>';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Marketplace</title>
 
-    <!-- TODO: Add any additional head elements (stylesheets, scripts, etc.) -->
-
 </head>
 <body>
 
 <?php
-
 // Check if the user is logged in
 if (isset($_SESSION['user_id'])) {
     // User is logged in, display a greeting

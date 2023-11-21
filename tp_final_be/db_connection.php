@@ -1,51 +1,47 @@
 <?php
+session_start();
 
-// intercambia credenciales con la ddbb
+// intercambia credenciales con la bbdd
 $servername = "127.0.0.1";
 $username = "root";
 $password = "databased69";
 $database = "tp_final_be";
 
-// crea conexion
+// crea connexion con la bbdd
 $conn = new mysqli($servername, $username, $password, $database);
 
-// chekea conexion
+// verifica conexion por errores
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// db_connection.php
+// crea consulta en la bbdd para el usuario ingresado
+$query = "SELECT * FROM users WHERE username = '$user_name'";
 
-// Check if the provided credentials are valid
-$result = $conn->query("SELECT * FROM users WHERE username = '$username'");
+// verifica las credenciales
+$result = $conn->query($query);
 
-// Check if the query was successful
+// verifica si la consulta devuelve resultado
 if ($result !== false) {
-    // Check if the provided credentials are valid
-    if ($result->num_rows == 1) {
+    // verifica si las credenciales son correctas
+    if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
 
-        // Verify the password
+        // verifica la contraseña
         if (password_verify($password, $user['password'])) {
-            // Set session variables
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-
-            // Check if the user is an admin
-            $_SESSION['is_admin'] = $user['admin'] == 1;
-
-            // Redirect to the main page
             header("Location: index.php");
             exit();
+
         } else {
-            // Invalid password
-            $login_error = "Invalid username or password";
+            // contraseña invalida 
+            $login_error = "Usuario o contraseña incorrecto/s";
         }
     } else {
-        // User not found
-        $login_error = "Invalid username or password";
+        // usuario invalido
+        $login_error = "Usuario o contraseña incorrecto/s";
     }
 } else {
-    // Query was not successful
-    $login_error = "Error executing query";
+    // la consulta no devuelve resultados
+    $login_error = "Error en la consulta";
 }
+?>
