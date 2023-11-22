@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 session_start();
 require_once('db_connection.php');
 
+// asigna el input a la variable $_POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_name = $_POST['username'];
     $name = $_POST['name'];
@@ -17,11 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $conn->query($query);
 
     if ($result) {
-        header("refresh:5; url=index.php");
-        echo "Registro exitoso! En 5 segundos será dirigido a la página principal";
+        header("refresh:4; url=index.php");
+        echo "Registro exitoso! En unos segundos será dirigido a la <a href='index.php'>página principal</a>";
     } else {
-        header("refresh:5; url=index.php");
-        echo "Error de registro. En 5 segundos será redirigido a la página principal. Código del error: " . $conn->error;
+        header("refresh:4; url=index.php");
+        echo "Error de registro. En unos segundos será redirigido a la <a href='index.php'>página principal</a>. Código del error: " . $conn->error;
     }
 }
 ?>

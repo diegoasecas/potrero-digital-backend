@@ -13,6 +13,19 @@ if (isset($_GET['id'])) {
     if ($item_result->num_rows > 0) {
         $item = $item_result->fetch_assoc();
 
+        // Fetch existing categories from the database
+        $category_query = "SELECT DISTINCT category FROM products";
+        $category_result = $conn->query($category_query);
+
+        // Initialize an array to store the categories
+        $categories = [];
+
+        if ($category_result->num_rows > 0) {
+            while ($category = $category_result->fetch_assoc()) {
+                $categories[] = $category['category'];
+            }
+        }
+
         // Display update form
         echo '<h2>Update Item</h2>';
         echo '<form action="update_delete_item.php?id=' . $item['id'] . '" method="post" enctype="multipart/form-data">';
@@ -20,8 +33,24 @@ if (isset($_GET['id'])) {
         echo '<input type="text" id="name" name="name" value="' . $item['name'] . '" required>';
         
         echo '<label for="category">Category:</label>';
-        echo '<input type="text" id="category" name="category" value="' . $item['category'] . '" required>';
-    
+        echo '<select id="category" name="category" required>';
+        echo '<option value="" disabled>Select Category</option>';
+
+        // Dynamically generate dropdown options
+        foreach ($categories as $categoryOption) {
+            $selected = ($item['category'] == $categoryOption) ? 'selected' : '';
+            echo '<option value="' . $categoryOption . '" ' . $selected . '>' . $categoryOption . '</option>';
+        }
+
+        echo '<option value="other">Other</option>';
+        echo '</select>';
+
+        // Additional input for a new category
+        echo '<div id="newCategoryInput" style="display: none;">';
+        echo '<label for="newCategory">New Category:</label>';
+        echo '<input type="text" id="newCategory" name="newCategory">';
+        echo '</div>';
+
         echo '<label for="descr">Description:</label>';
         echo '<textarea id="descr" name="descr" required>' . $item['descr'] . '</textarea>';
     
@@ -38,6 +67,17 @@ if (isset($_GET['id'])) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
             $name = $_POST['name'];
             $category = $_POST['category'];
+
+            // If the selected category is "Other," use the new category input
+            if ($category === 'other') {
+                $newCategory = $_POST['newCategory'];
+                $category = $newCategory;
+
+                // Add the new category to the database for future use
+                $conn->query("INSERT INTO products (category) VALUES ('$newCategory')");
+                $categories[] = $newCategory; // Add it to the array for immediate use in the dropdown
+            }
+
             $descr = $_POST['descr'];
             $price = $_POST['price'];
 
@@ -65,25 +105,22 @@ if (isset($_GET['id'])) {
             }
         }
 
-        /* // Display delete confirmation and button
-        echo '<h2>Delete Item</h2>';
-        echo '<p>Are you sure you want to delete the item: ' . $item['name'] . '?</p>';
-        echo '<form action="update_delete_item.php?id=' . $item['id'] . '" method="post">';
-        echo '<input type="submit" name="delete" value="Delete Item">';
-        echo '</form>'; */
-
+        // Display delete confirmation and button
         echo '<h2>Delete Item</h2>';
         echo '<p>Are you sure you want to delete the item: ' . $item['name'] . '?</p>';
         echo '<form action="update_delete_item.php?id=' . $item['id'] . '" method="post" id="deleteForm">';
         echo '<input type="submit" name="delete" value="Delete Item" onclick="confirmDelete()">';
         echo '</form>';
 
+        // JavaScript to toggle the display of the new category input based on user selection
         echo '<script>';
-        echo 'function confirmDelete() {';
-        echo '   if (confirm("Are you sure you want to delete this item?")) {';
-        echo '       document.getElementById("deleteForm").submit();';
-        echo '   }';
-        echo '}';
+        echo 'document.addEventListener("DOMContentLoaded", function() {';
+        echo '   var categorySelect = document.getElementById("category");';
+        echo '   var newCategoryInput = document.getElementById("newCategoryInput");';
+        echo '   categorySelect.addEventListener("change", function() {';
+        echo '       newCategoryInput.style.display = (categorySelect.value === "other") ? "block" : "none";';
+        echo '   });';
+        echo '});';
         echo '</script>';
 
         // Handle delete logic
@@ -93,8 +130,8 @@ if (isset($_GET['id'])) {
             $delete_result = $conn->query($delete_query);
 
             if ($delete_result) {
-                echo "Item eliminado con éxito! En 5 segundos será redirigido a la página principal";
-                header('Refresh:5; url=index.php');
+                echo "Item eliminado con éxito! En unos segundos será redirigido a la <a href='index.php'>página principal</a>";
+                header('Refresh:4; url=index.php');
             } else {
                 echo "Error eliminando item: " . $conn->error;
             }

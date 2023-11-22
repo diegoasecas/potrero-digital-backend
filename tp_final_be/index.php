@@ -43,7 +43,14 @@ if (isset($_SESSION['user_id'])) {
 
     if ($user_items_result->num_rows > 0) {
         while ($row = $user_items_result->fetch_assoc()) {
-            // ... (your existing code for displaying user's items)
+            echo '<div>';
+            echo '<h3>' . $row['name'] . '</h3>';
+            echo '<p>Category: ' . $row['category'] . '</p>';
+            echo '<p>Description: ' . $row['descr'] . '</p>';
+            echo '<p>Price: $' . $row['price'] . '</p>';
+            echo '<img src="' . $row['image_path'] . '" alt="' . $row['name'] . '" style="max-width: 200px; max-height: 200px;">'; // Display image
+            echo '<a href="item_detail.php?id=' . $row['id'] . '">View Details</a>';
+            echo '</div>';
         }
     } else {
         echo '<p>You have not uploaded any items yet.</p>';
