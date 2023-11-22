@@ -23,8 +23,7 @@ if (isset($_GET['id'])) {
 
         // Check if the logged-in user is the uploader
         if ((isset($_SESSION['user_id']) && $_SESSION['user_id'] == $item['uploader']) || (isset($_SESSION['is_admin']) && $_SESSION['is_admin']) == 1) {
-            echo '<a href="update_item.php?id=' . $item['id'] . '">Update Item</a>';
-            echo '<a href="delete_item.php?id=' . $item['id'] . '">Delete Item</a>';
+            echo '<a href="update_delete_item.php?id=' . $item['id'] . '">Update or delete item</a>';
         }
 
     } else {
