@@ -1,0 +1,33 @@
+footer {
+    color: white;
+    background-color: #007BFF;
+}
+
+main {
+    flex: 70%;
+    padding: 20px; /* Optional: Add padding to the main content */
+  }
+
+  aside {
+    flex: 30%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh; /* 100% of the viewport height */
+    background-color: #f8f9fa; /* Optional: Set background color for the sidebar */
+    padding: 20px; /* Optional: Add padding to the sidebar */
+    box-shadow: -5px 0 5px -5px #333; /* Optional: Add a shadow for separation */
+  }
+.navbar-nav a {
+    color: white !important;
+}
+
+.navbar-nav a:hover {
+    text-decoration: underline;
+}
+
+.navbar-brand {
+    font-size: 1.65em;
+    font-weight: bold;
+}
+
