@@ -1,23 +1,3 @@
-footer {
-    color: white;
-    background-color: #007BFF;
-}
-
-main {
-    flex: 70%;
-    padding: 20px; /* Optional: Add padding to the main content */
-  }
-
-  aside {
-    flex: 30%;
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh; /* 100% of the viewport height */
-    background-color: #f8f9fa; /* Optional: Set background color for the sidebar */
-    padding: 20px; /* Optional: Add padding to the sidebar */
-    box-shadow: -5px 0 5px -5px #333; /* Optional: Add a shadow for separation */
-  }
 .navbar-nav a {
     color: white !important;
 }
@@ -31,3 +11,67 @@ main {
     font-weight: bold;
 }
 
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    width: 80%;
+    margin: 2em auto 2em auto;
+    flex: 1;
+}
+
+footer {
+    color: white;
+    background-color: #007BFF;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.item {
+    flex: 1;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+@media (max-width: 767px) {
+    .container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1149px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1150px) and (max-width: 1439px) {
+    .container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1440px) and (max-width: 1599px) {
+    .container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1600px) {
+    .container {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
