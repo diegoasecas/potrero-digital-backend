@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Acceeder</title>
     <!-- TODO: Add any additional head elements (stylesheets, scripts, etc.) -->
 </head>
 <body>
@@ -16,7 +16,7 @@
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required>
 
-    <input type="submit" value="Login">
+    <input type="submit" value="Acceder">
 </form>
 
 <p>register</p>
