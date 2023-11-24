@@ -118,3 +118,52 @@ h2 {
     color: #218fa2;
 
  }
+
+ .divA, .divB {
+    box-sizing: border-box;
+  }
+  
+   
+  .divB {
+    display: flex;
+    align-items: center;
+    justify-content: left; /* Updated for right alignment */
+    padding-top: 3%;
+    
+  }
+  
+  @media screen and (min-width: 1185px) {
+    .sort {
+      display: flex;
+      width: 100%;
+    }
+  
+    .divA, .divB {
+      flex: 1;
+    }
+  
+    .divB {
+      order: 2;
+      justify-content: right;
+      padding-top: 0;
+    }
+  }
+
+  
+.emoji {
+    font-size: 12em;
+}
+
+@media (min-width: 992px) {
+    .emoji:hover {
+    font-size: 16em;
+}
+  }
+
+.back {
+font-size: 1.2em;
+}
+
+.back:hover {
+text-decoration: none;
+}
