@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,13 +10,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="index.html" title="Inicio">La Feria de Potrero &#x1F4B8;&#x1F91D;&#x1F381;</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -29,8 +30,7 @@
                     </li>
                 </ul>
                 <div class="input-group align-items-center">
-                    <input class="form-control mr-3 mr-sm-2 rounded-right" type="search"
-                        placeholder="Ej. Bicicleta playera" aria-label="Search">
+                    <input class="form-control mr-3 mr-sm-2 rounded-right" type="search" placeholder="Ej. Bicicleta playera" aria-label="Search">
                     <button class="btn btn-warning my-2 my-sm-0" type="submit">Buscar</button>
                 </div>
             </form>
@@ -39,27 +39,38 @@
 
     <main>
         <h1 class="mb-3 text-primary">Bicicleta Scott ruta</h1>
-        <div class="alert new-item border p-2 pl-3">
+        <div class="alert new-item border p-2 pl-3 text-muted">
             <div class="row">
-                <div class="col-lg-7 muted-text pb-3">
-                    
+                <div class="col-lg-7 muted-text p-3 pl-4">
                     <div class="small">Categoría:</div>
                     <div class="pb-2"><strong>Cosas de coso</strong></div>
                     <div class="small">Precio:</div>
                     <div class="h3 pb-2">$ 54.000</div>
                     <div class="small">Descripción:</div>
-                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis risus a feugiat sagittis.
-                        Phasellus vel pretium sem, id pulvinar massa. </div>
-                    <button type="button" class="mt-4 btn btn-warning common-button float-right">Actualizar o borrar</button>
+                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis risus a feugiat sagittis. Phasellus vel pretium sem, id pulvinar massa. </div>
+                    <button type="button" class="mt-4 btn btn-warning common-button float-right" data-toggle="modal" data-target="#imageModal">Actualizar o borrar</button>
                 </div>
+
                 <div class="col-lg-5 d-flex align-items-center justify-content-center">
-                    <!-- The commented-out emoji: <span class="emoji">&#x1FAF0;</span> -->
                     <div class="card expand-card square-aspect-ratio m-3">
-                        <img src="img/bici_ruta_scott_01.jpg" class="card-img-top" alt="Image">
+                        <img src="img/bici_ruta_scott_01.jpg" class="card-img-top" data-toggle="modal" data-target="#imageModal" alt="Image">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="img/bici_ruta_scott_01.jpg" class="img-fluid" alt="Image" style="width: 200%;">
                     </div>
                 </div>
             </div>
         </div>
+
         <a href="index.html" class="back">◄ Volver al Inicio</a>
     </main>
 
@@ -70,4 +81,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

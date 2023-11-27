@@ -215,3 +215,17 @@ text-decoration: none;
     object-fit: cover; /* Ensure the image covers the entire container while maintaining its aspect ratio */
 }
 
+.signature > p {
+    color:#e4e4e4;
+    font-size: smaller;
+    margin: 0;
+}
+
+.signature > p > a {
+    color:#e4e4e4;
+    text-decoration: underline;
+}
+
+.signature > p > a:hover {
+    color: #fff;   
+}

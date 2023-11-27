@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
 
     <!-- Navbar -->
@@ -33,8 +34,7 @@
                 </ul>
 
                 <div class="input-group align-items-center">
-                    <input class="form-control mr-3 mr-sm-2 rounded-right" type="search"
-                        placeholder="Ej. Bicicleta playera" aria-label="Search">
+                    <input class="form-control mr-3 mr-sm-2 rounded-right" type="search" placeholder="Ej. Bicicleta playera" aria-label="Search">
                     <button class="btn btn-warning my-2 my-sm-0" type="submit">Buscar</button>
                 </div>
 
@@ -45,8 +45,8 @@
     <main>
         <div class="alert alert-info new-item">
             <div class="row">
-                
-                <div class="col-lg-7 muted-text pb-4">
+
+                <div class="col-lg-7 text-muted custom-text pb-4">
 
                     <h1 class="h3 mb-3">Editar publicación</h1>
 
@@ -94,42 +94,29 @@
                         </div>
 
                         <div class="d-flex justify-content-end">
-                            <button type="submit"
-                                class="btn btn-success btn-block"><strong>Aceptar y actualizar</strong></button>
+                            <button type="submit" class="btn btn-success btn-block"><strong>Aceptar y actualizar</strong></button>
                         </div>
-
                     </form>
                 </div>
 
 
                 <div class="col-lg-4 d-flex align-items-center justify-content-center">
+                    <div class="card alert-danger mb-3">
+                        <div class="card-body">
+                            <h2 class="h4 card-title">Eliminar</h2>
+                            <p class="card-text">Advertencia: Esta acción no se puede deshacer</p>
 
+                            <div style="font-size: 6em; text-align: center; padding-bottom: 0.25em;">&#x1F5D1;</div>
 
-<div class="card alert-danger mb-3">
-  <div class="card-body">
-    <h4 class="card-title">Eliminar</h4>
-    <p class="card-text">Advertencia: Esta acción no se puede deshacer</p>
-
-    <div style="font-size: 6em; text-align: center; padding-bottom: 0.25em;">&#x1F5D1;</div>
-
-<!-- &#x274C; -->
-
-<button type="button" class="btn btn-danger btn-block"><strong>Borrar publicación</strong></button>
-  </div>
-</div>
-
-
-
-                    <!-- <div class="alert alert-danger" role="alert">
-  A simple danger alert—check it out!
-</div> -->
+                            <button type="button" class="btn btn-danger btn-block"><strong>Borrar publicación</strong></button>
+                        </div>
+                    </div>
                 </div>
 
             </div>
         </div>
 
         <a href="index.html" class="back">◄ Volver al Inicio</a>
-
     </main>
 
     <footer class="footer bg-primary text-white text-center p-2 mt-auto p-4">Diego Guaraz - Potrero Digital</footer>
