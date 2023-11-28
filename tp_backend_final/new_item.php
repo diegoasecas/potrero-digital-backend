@@ -2,121 +2,195 @@
 session_start();
 require_once('db_connection.php');
 
-// Fetch existing categories from the database
-$category_query = "SELECT DISTINCT category FROM products";
-$category_result = $conn->query($category_query);
+// Define las categorías disponibles
+$predefinedCategories = [
+    'Aire libre y jardinería',
+    'Deportes',
+    'Hobbies',
+    'Moda e indumentaria',
+    'Hogar y electrodomésticos',
+    'Celulares y electrónica',
+    'Instrumentos musicales',
+    'Productos para mascotas',
+    'Otros'
+];
 
-// Initialize an array to store the categories
-$categories = [];
+// Lógica del formulario
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = $_POST['name'];
+    $category = $_POST['category'];
+    $descr = $_POST['descr'];
+    $price = $_POST['price'];
+    $uploader = $_SESSION['user_id'];
 
-if ($category_result->num_rows > 0) {
-    while ($category = $category_result->fetch_assoc()) {
-        $categories[] = $category['category'];
+    // Asigna variables para la carga de imágenes
+    $target_dir = './uploads/';
+    $target_file = $target_dir . basename($_FILES["image"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+    // Mueve la imagen cargada a su directorio final
+    move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+
+    // Inserta el nuevo item en la tabla 'products'
+    $image_path = $target_file;
+    $query = "INSERT INTO products (name, category, descr, price, uploader, image_path) VALUES ('$name', '$category', '$descr', '$price', '$uploader', '$image_path')";
+
+    if ($conn->query($query) === TRUE) {
+        $success_msg = "Publicación creada con éxito";
+        header("Location: success.php?success_msg=" . urlencode($success_msg));
+        exit();
+    } else {
+        $error_msg = "Se produjo un error al intentar crear una nueva publicación";
+        header("Location: error.php?error_msg=" . urlencode($error_msg));
+        exit();
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create New Item</title>
-</head>
-<body>
 
-<?php
-// Process the form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
-    $category = $_POST['category'];
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Publicar nuevo artículo / La Feria de Potrero</title>
 
-    // If the selected category is "Other," use the new category input
-    if ($category === 'other') {
-        $newCategory = $_POST['newCategory'];
-        $category = $newCategory;
+        <!-- CSS Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
 
-        // Add the new category to the database for future use
-        $conn->query("INSERT INTO products (category) VALUES ('$newCategory')");
-        $categories[] = $newCategory; // Add it to the array for immediate use in the dropdown
-    }
+    <body>
 
-    $descr = $_POST['descr'];
-    $price = $_POST['price'];
-    $uploader = $_SESSION['user_id'];
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
-    // Assign variables for handling uploaded images
-    $target_dir = './uploads/';
-    $target_file = $target_dir . basename($_FILES["image"]["name"]);
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+            <a class="navbar-brand" href="index.html" title="Inicio">La Feria de Potrero &#x1F4B8;&#x1F91D;&#x1F381;</a>
 
-    // Move the uploaded image to its final directory
-    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-        echo "El archivo " . htmlspecialchars(basename($_FILES["image"]["name"])) . " ha sido cargado correctamente. ";
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        // Insert the new item into the 'products' table
-        $image_path = $target_file;
-        $query = "INSERT INTO products (name, category, descr, price, uploader, image_path) VALUES ('$name', '$category', '$descr', '$price', '$uploader', '$image_path')";
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <form class="form-inline my-2 my-lg-0 ml-auto">
 
-        if ($conn->query($query) === TRUE) {
-            echo "Item creado con éxito! En unos segundos será redirigido a la <a href='index.php'>página principal</a>";
-            header('Refresh:4; url=index.php');
-        } else {
-            echo "Error al intentar crear nuevo item: " . $conn->error;
-        }
-    } else {
-        echo "Ha habido un error en la carga de su archivo.";
-        echo "Detalles del error: " . error_get_last()['message'];
-    }
-}
-?>
+                    <ul class="navbar-nav mr-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="./about.html">Acerca de</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login_register_form.html">Acceder / Registrarse</a>
+                        </li>
+                    </ul>
 
-<form action="new_item.php" method="post" enctype="multipart/form-data">
-    <label for="name">Nombre:</label>
-    <input type="text" id="name" name="name" required>
-    
-    <label for="category">Categoría:</label>
-    <select id="category" name="category" required>
-        <option value="" disabled selected>Select Category</option>
-        <?php
-        // Dynamically generate dropdown options
-        foreach ($categories as $categoryOption) {
-            echo '<option value="' . $categoryOption . '">' . $categoryOption . '</option>';
-        }
-        ?>
-        <option value="other">Other</option>
-    </select>
+                    <div class="input-group align-items-center">
+                        <input class="form-control mr-3 mr-sm-2 rounded-right" type="search"
+                            placeholder="Ej. Bicicleta playera" aria-label="Search">
+                        <button class="btn btn-warning my-2 my-sm-0" type="submit">Buscar</button>
+                    </div>
 
-    <!-- Additional input for a new category -->
-    <div id="newCategoryInput" style="display: none;">
-        <label for="newCategory">New Category:</label>
-        <input type="text" id="newCategory" name="newCategory">
-    </div>
+                </form>
+            </div>
+        </nav>
 
-    <label for="descr">Descripción:</label>
-    <textarea id="descr" name="descr" required></textarea>
+        <main>
+            <div class="alert alert-info new-item">
+                <div class="row">
 
-    <label for="price">Precio:</label>
-    <input type="text" id="price" name="price" required>
+                    <div class="col-lg-7 text-muted custom-text pb-4">
+                        <h1 class="h3 mb-3">Publicar nuevo artículo</h1>
+                                            
+                        <form action="new_item.php" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="name">Nombre del artículo:</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
 
-    <!-- File input for image upload -->
-    <input type="file" name="image" id="image" style="display:none" required>
+                            <div class="form-group">
+                                <label for="category" style="display:none" >Categoría:</label>
+                                <select class="form-control" id="category" name="category" required>
+                                    <option value="" disabled selected>Seleccionar categoría</option>
+                                    <?php
+                                    foreach ($predefinedCategories as $categoryOption) {
+                                        echo '<option value="' . $categoryOption . '">' . $categoryOption . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
 
-    <!-- Custom styled button for image upload -->
-    <label for="image" style="cursor: pointer; display: inline-block; padding: 10px 20px;">Cargar imagen</label>
+                            <div class="row align-items-center">
+                                <div class="col-2 pb-1">
+                                    <label for="price">Precio:</label>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" id="price" name="price" required>
+                                    </div>
+                                </div>
+                            </div>
 
-    <!-- Submit button -->
-    <button type="submit" style="cursor: pointer; display: inline-block; padding: 10px 20px;">Crear nuevo item</button>
-</form>
+                            <div class="form-group">
+                                <label for="descr">Descripción:</label>
+                                <textarea class="form-control" id="descr" name="descr" required rows="3"></textarea>
+                            </div>
 
-<script>
-    // JavaScript to toggle the display of the new category input based on user selection
-    document.getElementById('category').addEventListener('change', function() {
-        var newCategoryInput = document.getElementById('newCategoryInput');
-        newCategoryInput.style.display = this.value === 'other' ? 'block' : 'none';
-    });
-</script>
 
-</body>
+                            <div class="form-group">
+                                <label for="image" class="btn btn-primary">Cargar imagen</label>
+                                <input type="file" name="image" id="image" class="visually-hidden" required>
+                            </div>
+
+                            <div class="alert alert-warning" id="successMessage" style="display: none;">
+                            </div>
+
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-success btn-block"><strong>Publicar!</strong></button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-lg-4 d-flex align-items-center justify-content-center">
+                        <div class="card alert-success mb-3">
+                            <div class="card-body">
+                                <h2 class="h4 card-title">Ganá platita!</h5>
+                                <p class="card-text">Convertí las cosas que no usás en dinero en la Feria de Potrero Digital</p>
+
+                                <div style="font-size: 8em; text-align: center; padding-bottom: 0.25em;">&#x1F911;</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <a href="index.html" class="back">◄ Volver al Inicio</a>
+        </main>
+
+        <footer class="footer bg-primary text-white text-center p-2 mt-auto p-4">
+            <div class="signature">
+                <p>Diego Guaraz para <a href="https://www.potrerodigital.org/">Potrero Digital</a></p>
+                <p>Desarrollo Web Back End (Prof. Luis Amarilla)</p>
+                <p>Mar del Plata, Noviembre 2023</p>
+            </div>
+        </footer>
+
+    <!-- JS Bootstrap + etc -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <!-- JS para el mensaje de carga -->
+        <script>
+            function showSuccessMessage(message) {
+                var successMessageDiv = document.getElementById('successMessage');
+                successMessageDiv.innerHTML = '<small>' + message + '</small>';
+                successMessageDiv.style.display = 'block';
+            }
+            document.getElementById('image').addEventListener('change', function () {
+                showSuccessMessage('Imagen cargada exitosamente.');
+            });
+        </script>
+    </body>
 </html>

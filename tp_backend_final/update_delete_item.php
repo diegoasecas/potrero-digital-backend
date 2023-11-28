@@ -13,55 +13,18 @@ if (isset($_GET['id'])) {
     if ($item_result->num_rows > 0) {
         $item = $item_result->fetch_assoc();
 
-        // Fetch existing categories from the database
-        $category_query = "SELECT DISTINCT category FROM products";
-        $category_result = $conn->query($category_query);
-
-        // Initialize an array to store the categories
-        $categories = [];
-
-        if ($category_result->num_rows > 0) {
-            while ($category = $category_result->fetch_assoc()) {
-                $categories[] = $category['category'];
-            }
-        }
-
-        // Display update form
-        echo '<h2>Update Item</h2>';
-        echo '<form action="update_delete_item.php?id=' . $item['id'] . '" method="post" enctype="multipart/form-data">';
-        echo '<label for="name">Name:</label>';
-        echo '<input type="text" id="name" name="name" value="' . $item['name'] . '" required>';
-        
-        echo '<label for="category">Category:</label>';
-        echo '<select id="category" name="category" required>';
-        echo '<option value="" disabled>Select Category</option>';
-
-        // Dynamically generate dropdown options
-        foreach ($categories as $categoryOption) {
-            $selected = ($item['category'] == $categoryOption) ? 'selected' : '';
-            echo '<option value="' . $categoryOption . '" ' . $selected . '>' . $categoryOption . '</option>';
-        }
-
-        echo '<option value="other">Other</option>';
-        echo '</select>';
-
-        // Additional input for a new category
-        echo '<div id="newCategoryInput" style="display: none;">';
-        echo '<label for="newCategory">New Category:</label>';
-        echo '<input type="text" id="newCategory" name="newCategory">';
-        echo '</div>';
-
-        echo '<label for="descr">Description:</label>';
-        echo '<textarea id="descr" name="descr" required>' . $item['descr'] . '</textarea>';
-    
-        echo '<label for="price">Price:</label>';
-        echo '<input type="text" id="price" name="price" value="' . $item['price'] . '" required>';
-    
-        echo '<label for="image">Upload Image:</label>';
-        echo '<input type="file" name="image" id="image">';
-    
-        echo '<input type="submit" name="update" value="Update Item">';
-        echo '</form>';
+        // Define las categorías disponibles
+        $predefinedCategories = [
+            'Aire libre y jardinería',
+            'Deportes',
+            'Hobbies',
+            'Moda e indumentaria',
+            'Hogar y electrodomésticos',
+            'Celulares y electrónica',
+            'Instrumentos musicales',
+            'Productos para mascotas',
+            'Otros'
+        ];
 
         // Handle update logic
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
@@ -90,38 +53,21 @@ if (isset($_GET['id'])) {
             } else {
                 $image_path = $item['image_path'];
             }
-
-            // TODO: Validate and sanitize inputs (for a real-world scenario)
-
+            
             // Update the item in the 'products' table
             $update_query = "UPDATE products SET name='$name', category='$category', descr='$descr', price='$price', image_path='$image_path' WHERE id='$item_id'";
             $update_result = $conn->query($update_query);
 
             if ($update_result) {
-                echo "Item updated successfully!";
-                header('Refresh:5; url=item_detail.php?id=' . $item_id);
+                $success_msg = "Item actualizado exitosamente";
+                header("Location: success.php?success_msg=" . urlencode($success_msg));
+                exit();
             } else {
-                echo "Error updating item: " . $conn->error;
+                $error_msg = "Se produjo un error al intentar actualizar la publicación";
+                header("Location: error.php?error_msg=" . urlencode($error_msg));
+                exit();
             }
         }
-
-        // Display delete confirmation and button
-        echo '<h2>Delete Item</h2>';
-        echo '<p>Are you sure you want to delete the item: ' . $item['name'] . '?</p>';
-        echo '<form action="update_delete_item.php?id=' . $item['id'] . '" method="post" id="deleteForm">';
-        echo '<input type="submit" name="delete" value="Delete Item" onclick="confirmDelete()">';
-        echo '</form>';
-
-        // JavaScript to toggle the display of the new category input based on user selection
-        echo '<script>';
-        echo 'document.addEventListener("DOMContentLoaded", function() {';
-        echo '   var categorySelect = document.getElementById("category");';
-        echo '   var newCategoryInput = document.getElementById("newCategoryInput");';
-        echo '   categorySelect.addEventListener("change", function() {';
-        echo '       newCategoryInput.style.display = (categorySelect.value === "other") ? "block" : "none";';
-        echo '   });';
-        echo '});';
-        echo '</script>';
 
         // Handle delete logic
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
@@ -130,17 +76,191 @@ if (isset($_GET['id'])) {
             $delete_result = $conn->query($delete_query);
 
             if ($delete_result) {
-                echo "Item eliminado con éxito! En unos segundos será redirigido a la <a href='index.php'>página principal</a>";
-                header('Refresh:4; url=index.php');
+                $success_msg = "Item eliminado exitosamente";
+                header("Location: success.php?success_msg=" . urlencode($success_msg));
+                exit();
             } else {
-                echo "Error eliminando item: " . $conn->error;
+                $error_msg = "Se produjo un error al intentar eliminar la publicación";
+                header("Location: error.php?error_msg=" . urlencode($error_msg));
+                exit();
             }
         }
 
     } else {
-        echo 'Item not found';
+        $error_msg = "Publicación no encontrada";
+        header("Location: error.php?error_msg=" . urlencode($error_msg));
+        exit();
     }
 } else {
-    echo 'Invalid request';
+    $error_msg = "Petición inválida";
+    header("Location: error.php?error_msg=" . urlencode($error_msg));
+    exit();
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Publicar nuevo artículo / La Feria de Potrero</title>
+
+        <!-- CSS Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+
+    <body>
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+            <a class="navbar-brand" href="index.html" title="Inicio">La Feria de Potrero &#x1F4B8;&#x1F91D;&#x1F381;</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <form class="form-inline my-2 my-lg-0 ml-auto">
+
+                    <ul class="navbar-nav mr-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="./about.html">Acerca de</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login_register_form.html">Acceder / Registrarse</a>
+                        </li>
+                    </ul>
+
+                    <div class="input-group align-items-center">
+                        <input class="form-control mr-3 mr-sm-2 rounded-right" type="search"
+                            placeholder="Ej. Bicicleta playera" aria-label="Search">
+                        <button class="btn btn-warning my-2 my-sm-0" type="submit">Buscar</button>
+                    </div>
+
+                </form>
+            </div>
+        </nav>
+
+        <main>
+            <div class="alert alert-info new-item">
+                <div class="row">
+
+                    <div class="col-lg-7 text-muted custom-text pb-4">
+                        <h1 class="h3 mb-3">Publicar nuevo artículo</h1>
+                            <div class="form-group">
+                                <?php
+                                    echo '<form action="update_delete_item.php?id=' . $item['id'] . '" method="post" enctype="multipart/form-data">';
+                                    echo '<label for="name">Nombre del artículo:</label>';
+                                    echo '<input type="text" class="form-control" id="name" name="name" value="' . $item['name'] . '" required>';
+                                ?>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category" style="display:none" >Categoría:</label>
+                                <select class="form-control" id="category" name="category" required>
+                                    <option value="" disabled selected>Seleccionar categoría</option>                                    
+                                    <?php
+                                        foreach ($predefinedCategories as $categoryOption) {
+                                        $selected = ($item['category'] == $categoryOption) ? 'selected' : '';
+                                        echo '<option value="' . $categoryOption . '" ' . $selected . '>' . $categoryOption . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+
+                            <div class="row align-items-center">
+                                <div class="col-2 pb-1">
+                                    <label for="price">Precio:</label>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <?php
+                                            echo '<input class="form-control" type="text" id="price" name="price" value="' . $item['price'] . '" required>';
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="descr">Descripción:</label>
+                                <?php
+                                    echo '<textarea class="form-control" id="descr" name="descr" required rows="3">' . $item['descr'] . '</textarea>';
+                                ?>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="image" class="btn btn-primary">Cargar imagen</label>
+                                <input type="file" name="image" id="image" class="visually-hidden">
+                            </div>
+
+                            <div class="alert alert-warning" id="successMessage" style="display: none;">
+                            </div>
+
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" name="update" class="btn btn-success btn-block"><strong>Actualizar publicación</strong></button>
+
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-lg-4 d-flex align-items-center justify-content-center">
+                    <div class="card alert-danger mb-3">
+                        <div class="card-body">
+                            <h2 class="h4 card-title">Eliminar</h2>
+                            
+                            <?php
+                                echo '<p>Desea eliminar la publicación <em>' . $item['name'] . '</em>?</p>';
+                                echo '<form action="update_delete_item.php?id=' . $item['id'] . '" method="post" id="deleteForm">';
+                            ?>
+
+                                <div style="font-size: 6em; text-align: center; padding-bottom: 0.25em;">&#x1F5D1;</div>
+                                <p class="card-text small">Advertencia: Esta acción no se puede deshacer</p>
+                                <button type="submit" name="delete" class="btn btn-danger btn-block" onclick="return confirmDelete()"><strong>Borrar publicación</strong></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+
+            <a href="index.html" class="back">◄ Volver al Inicio</a>
+        </main>
+
+        <footer class="footer bg-primary text-white text-center p-2 mt-auto p-4">
+            <div class="signature">
+                <p>Diego Guaraz para <a href="https://www.potrerodigital.org/">Potrero Digital</a></p>
+                <p>Desarrollo Web Back End (Prof. Luis Amarilla)</p>
+                <p>Mar del Plata, Noviembre 2023</p>
+            </div>
+        </footer>
+
+    <!-- JS Bootstrap + etc -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <!-- JS para el mensaje de carga -->
+        <script>
+            function showSuccessMessage(message) {
+                var successMessageDiv = document.getElementById('successMessage');
+                successMessageDiv.innerHTML = '<small>' + message + '</small>';
+                successMessageDiv.style.display = 'block';
+            }
+            document.getElementById('image').addEventListener('change', function () {
+                showSuccessMessage('Imagen cargada exitosamente.');
+            });
+        </script>
+        <!-- JS para la confirmación de la eliminación -->
+        <script>
+            function confirmDelete() {
+                return confirm("¿Estás seguro de que deseas eliminar esta publicación?");
+            }
+        </script>
+    </body>
+</html>

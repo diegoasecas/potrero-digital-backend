@@ -18,7 +18,7 @@ include("login.php");
 <body>
     <!-- navbar bootstrap-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="index.html" title="Inicio">La Feria de Potrero &#x1F4B8;&#x1F91D;&#x1F381;<!-- &#x1F4B8;&#x1FAF0;&#x1F911;&#x1F4B0 --></a>
+        <a class="navbar-brand" href="index.php" title="Inicio">La Feria de Potrero &#x1F4B8;&#x1F91D;&#x1F381;<!-- &#x1F4B8;&#x1FAF0;&#x1F911;&#x1F4B0 --></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,10 +26,10 @@ include("login.php");
             <form class="form-inline my-2 my-lg-0 ml-auto">
                 <ul class="navbar-nav mr-3">
                     <li class="nav-item">
-                        <a class="nav-link" href="./about.html">Acerca de</a>
+                        <a class="nav-link" href="./about.php">Acerca de</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login_register_form.html">Acceder / Registrarse</a>
+                        <a class="nav-link" href="login_register_form.php">Acceder / Registrarse</a>
                     </li>
                 </ul>
                 
@@ -50,12 +50,12 @@ include("login.php");
     echo '<main>';
     echo '   <div class="alert alert-danger text-muted">';
     echo '       <div class="card-body text-center">';
-    echo urldecode($_GET['error_msg']) . '. En unos segundos te vamos a redirigir a la <a href="index.html">página principal</a>';
+    echo urldecode($_GET['error_msg']) . '. En unos segundos te vamos a redirigir a la <a href="index.php">página principal</a>';
     echo '       </div>';
     echo '   </div>';
-    echo '   <a href="index.html" class="back">◄ Volver al Inicio</a>';
+    echo '   <a href="index.php" class="back">◄ Volver al Inicio</a>';
     echo '</main>';
-    header("Refresh:3; url=index.html");
+    header("Refresh:3; url=index.php");
     ?>
     
     <footer class="footer bg-primary text-white text-center p-2 mt-auto p-4">
