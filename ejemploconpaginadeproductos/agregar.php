@@ -1,11 +1,11 @@
 ﻿<?php
   // 1) Conexion
-  // a) realizar la conexion con la bbdd
+  // a) realizar la conexion con la BBDD
   // b) seleccionar la base de datos a usar
 $conexion = mysqli_connect("127.0.0.1","root","");
 
   // 2) Almacenamos los datos del envío POST
-  // a) generar variables para cada dato a almacenar en la bbdd
+  // a) generar variables para cada dato a almacenar en la BBDD
   $prenda = $_POST ['prenda'];
   $marca = $_POST['marca'];
   $talle = $_POST['talle'];

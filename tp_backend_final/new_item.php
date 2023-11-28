@@ -101,6 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <div class="col-lg-7 text-muted custom-text pb-4">
                         <h1 class="h3 mb-3">Publicar nuevo artículo</h1>
+
+                        <!-- Formulario creación -->
                                             
                         <form action="new_item.php" method="post" enctype="multipart/form-data">
                             <div class="form-group">
@@ -176,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </footer>
 
-    <!-- JS Bootstrap + etc -->
+        <!-- JS Bootstrap + etc -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -189,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 successMessageDiv.style.display = 'block';
             }
             document.getElementById('image').addEventListener('change', function () {
-                showSuccessMessage('Imagen cargada exitosamente.');
+                showSuccessMessage('Imagen cargada éxitosamente.');
             });
         </script>
     </body>

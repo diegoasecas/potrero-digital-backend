@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $query = "SELECT * FROM users WHERE username = '$user_name' AND password = '$password'";
     $result = $conn->query($query);
 
-    // si usuario y contraseña coinciden se setean la variable $_SESSION de acuerdo al usuario en bbdd
+    // si usuario y contraseña coinciden se setean la variable $_SESSION de acuerdo al usuario en BBDD
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
         $_SESSION['user_id'] = $user['id'];
@@ -21,13 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // verifica si el usuario tiene permisos de admin
         $_SESSION['is_admin'] = $user['admin'] == 1;
 
-        // redirige a la pag ppal
+        // redirige a la pág. ppal.
         header("Refresh:4; url=index.php");
-        echo "<h2>Login exitoso!</h2>";
+        echo "<h2>Login éxitoso!</h2>";
         echo "<p class=''>Bienvenido, " . $_SESSION['name'] . "! En unos segundos será redirigido a la <a href='index.php'>página principal</a>.</p>";
         exit();
     } else {
-        // si no coinciden muestra error y redirige a la pag ppal
+        // si no coinciden muestra error y redirige a la pág. ppal.
         header("refresh:4; url=index.php");
         echo "<h2>Error de login</h2>";
         echo "<p class=''>Usuario o contraseña incorrecto/s. En unos segundos será redirigido a la <a href='index.php'>página principal</a>.</p>";

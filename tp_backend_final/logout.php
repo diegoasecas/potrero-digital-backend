@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-// desasigna la variable $_SESSION
+// Desasigna la variable $_SESSION
 $_SESSION = array();
 
-// elimina la sesion
+// Elimina la sesión
 session_destroy();
 
-// redirige a la pag ppal
+// Redirige a la pág. ppal.
 header("Location: index.php");
 exit();
 ?>

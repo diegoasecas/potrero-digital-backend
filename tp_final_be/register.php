@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($result) {
         header("refresh:4; url=index.php");
-        echo "Registro exitoso! En unos segundos será dirigido a la <a href='index.php'>página principal</a>";
+        echo "Registro éxitoso! En unos segundos será dirigido a la <a href='index.php'>página principal</a>";
     } else {
         header("refresh:4; url=index.php");
         echo "Error de registro. En unos segundos será redirigido a la <a href='index.php'>página principal</a>. Código del error: " . $conn->error;

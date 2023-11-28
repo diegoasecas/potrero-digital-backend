@@ -1,6 +1,6 @@
 ﻿<?php
 // 1) Conexion
-// a) realizar la conexion con la bbdd
+// a) realizar la conexion con la BBDD
 // b) seleccionar la base de datos a usar
 $conexion=mysqli_connect("127.0.0.1","root","databased69");
  mysqli_select_db($conexion,"tienda");
@@ -64,7 +64,7 @@ $datos=mysqli_fetch_array($repuesta);
         // Si en la variable constante $_POST existe un indice llamado 'guardar_cambios' ocurre el bloque de instrucciones.
         if(array_key_exists('guardar_cambios',$_POST)){
             // 2') Almacenamos los datos actualizados del envío POST
-            // a) generar variables para cada dato a almacenar en la bbdd
+            // a) generar variables para cada dato a almacenar en la BBDD
             // Si se desea almacenar una imagen en la base de datos usar lo siguiente:
             // addslashes(file_get_contents($_FILES['ID NOMBRE DE LA IMAGEN EN EL FORMULARIO']['tmp_name']))
             $prenda=$_POST['prenda'];

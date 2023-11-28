@@ -2,11 +2,11 @@
 session_start();
 require_once('db_connection.php');
 
-// Check if the 'id' parameter is set in the URL
+// Verifica si el parám. 'id' está especificado en la url
 if (isset($_GET['id'])) {
     $item_id = $_GET['id'];
 
-    // Retrieve item details from the 'products' table
+    // Recupera detalles del item de la tabla 'products'
     $item_query = "SELECT * FROM products WHERE id = '$item_id'";
     $item_result = $conn->query($item_query);
 
@@ -26,25 +26,14 @@ if (isset($_GET['id'])) {
             'Otros'
         ];
 
-        // Handle update logic
+        // Lógica del formulario de edición
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
             $name = $_POST['name'];
             $category = $_POST['category'];
-
-            // If the selected category is "Other," use the new category input
-            if ($category === 'other') {
-                $newCategory = $_POST['newCategory'];
-                $category = $newCategory;
-
-                // Add the new category to the database for future use
-                $conn->query("INSERT INTO products (category) VALUES ('$newCategory')");
-                $categories[] = $newCategory; // Add it to the array for immediate use in the dropdown
-            }
-
             $descr = $_POST['descr'];
             $price = $_POST['price'];
 
-            // File upload handling
+            // Lógica de la carga de imagen
             if (!empty($_FILES["image"]["name"])) {
                 $target_dir = "uploads/";
                 $target_file = $target_dir . basename($_FILES["image"]["name"]);
@@ -54,12 +43,12 @@ if (isset($_GET['id'])) {
                 $image_path = $item['image_path'];
             }
             
-            // Update the item in the 'products' table
+            // Actualiza el item en la tabla 'products'
             $update_query = "UPDATE products SET name='$name', category='$category', descr='$descr', price='$price', image_path='$image_path' WHERE id='$item_id'";
             $update_result = $conn->query($update_query);
 
             if ($update_result) {
-                $success_msg = "Item actualizado exitosamente";
+                $success_msg = "Item actualizado éxitosamente";
                 header("Location: success.php?success_msg=" . urlencode($success_msg));
                 exit();
             } else {
@@ -69,14 +58,14 @@ if (isset($_GET['id'])) {
             }
         }
 
-        // Handle delete logic
+        // Lógica del formulario de eliminación
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
             // Delete the item from the 'products' table
             $delete_query = "DELETE FROM products WHERE id='$item_id'";
             $delete_result = $conn->query($delete_query);
 
             if ($delete_result) {
-                $success_msg = "Item eliminado exitosamente";
+                $success_msg = "Item eliminado éxitosamente";
                 header("Location: success.php?success_msg=" . urlencode($success_msg));
                 exit();
             } else {
@@ -150,8 +139,9 @@ if (isset($_GET['id'])) {
                 <div class="row">
 
                     <div class="col-lg-7 text-muted custom-text pb-4">
-                        <h1 class="h3 mb-3">Publicar nuevo artículo</h1>
+                        <h1 class="h3 mb-3">Editar publicación</h1>
                             <div class="form-group">
+                                <!-- Formulario de edición -->
                                 <?php
                                     echo '<form action="update_delete_item.php?id=' . $item['id'] . '" method="post" enctype="multipart/form-data">';
                                     echo '<label for="name">Nombre del artículo:</label>';
@@ -212,7 +202,7 @@ if (isset($_GET['id'])) {
                     <div class="card alert-danger mb-3">
                         <div class="card-body">
                             <h2 class="h4 card-title">Eliminar</h2>
-                            
+                            <!-- Formulario de eliminación -->
                             <?php
                                 echo '<p>Desea eliminar la publicación <em>' . $item['name'] . '</em>?</p>';
                                 echo '<form action="update_delete_item.php?id=' . $item['id'] . '" method="post" id="deleteForm">';
@@ -253,7 +243,7 @@ if (isset($_GET['id'])) {
                 successMessageDiv.style.display = 'block';
             }
             document.getElementById('image').addEventListener('change', function () {
-                showSuccessMessage('Imagen cargada exitosamente.');
+                showSuccessMessage('Imagen cargada éxitosamente.');
             });
         </script>
         <!-- JS para la confirmación de la eliminación -->

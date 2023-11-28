@@ -9,13 +9,13 @@ include("login.php");
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>La Feria de Potrero</title>
 
-    <!-- Bootstrap CSS -->
+    <!-- CSS Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
-    <!-- Navbar -->
+    <!-- Navbar Bootstrap -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="index.php" title="Inicio">La Feria de Potrero &#x1F4B8;&#x1F91D;&#x1F381;<!-- &#x1F4B8;&#x1FAF0;&#x1F911;&#x1F4B0 --></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +39,7 @@ include("login.php");
         </div>
     </nav>
 
-    <!-- alerta bootstrap con mensaje de exito segun output login.php -->    
+    <!-- Alerta Bootstrap con mensaje de éxito segun output login.php -->    
     <?php
     echo '<main>';
     echo '   <div class="alert alert-success text-muted">';
@@ -60,7 +60,7 @@ include("login.php");
         </div>
     </footer>
 
-    <!-- Bootstrap JS and dependencies (jQuery, Popper.js) -->
+    <!-- JS Bootstrap + etc -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

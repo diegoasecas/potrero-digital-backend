@@ -1,6 +1,6 @@
 ﻿<?php
 // 1) Conexion
-// a) realizar la conexion con la bbdd
+// a) realizar la conexion con la BBDD
 // b) seleccionar la base de datos a usar
 $conexion=mysqli_connect("127.0.0.1","root","databased69");
 mysqli_select_db($conexion,"tienda");
