@@ -1,3 +1,5 @@
+<!-- success.php -->
+
 <?php
 include("login.php");
 ?>
@@ -25,10 +27,19 @@ include("login.php");
             <form class="form-inline my-2 my-lg-0 ml-auto">
                 <ul class="navbar-nav mr-3">
                     <li class="nav-item">
-                        <a class="nav-link" href="./about.php">Acerca de</a>
+                        <a class="nav-link" href="about.php">Acerca de</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login_register_form.php">Acceder / Registrarse</a>
+                            <span class="nav-link" style="color:white;">|</span>
+                        </li>
+                    <li class="nav-item">
+                        <?php
+                            if (isset($_SESSION['user_id'])) {
+                                echo '<a class="nav-link" href="logout.php">Cerrar sesión</a>';
+                            } else {
+                                echo '<a class="nav-link" href="login_register_form.php">Acceder / Registrarse</a>';
+                            }
+                        ?>
                     </li>
                 </ul>
                 <div class="input-group align-items-center">
@@ -39,7 +50,7 @@ include("login.php");
         </div>
     </nav>
 
-    <!-- Alerta Bootstrap con mensaje de éxito segun output login.php -->    
+    <!-- Alerta Bootstrap con mensaje de éxito segun output pág que redirecciona -->    
     <?php
     echo '<main>';
     echo '   <div class="alert alert-success text-muted">';

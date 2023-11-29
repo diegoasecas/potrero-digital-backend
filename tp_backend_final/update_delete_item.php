@@ -1,6 +1,14 @@
+<!-- update_delete_item.php -->
+
 <?php
 session_start();
 require_once('db_connection.php');
+
+// Verifica si el usuario está logueado y si no lo está redirecciona a la página dde login
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login_register_form.php");
+    exit();
+}
 
 // Verifica si el parám. 'id' está especificado en la url
 if (isset($_GET['id'])) {
@@ -28,10 +36,11 @@ if (isset($_GET['id'])) {
 
         // Lógica del formulario de edición
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
-            $name = $_POST['name'];
-            $category = $_POST['category'];
-            $descr = $_POST['descr'];
-            $price = $_POST['price'];
+
+            $name = mysqli_real_escape_string($conn, $_POST['name']);
+            $category = mysqli_real_escape_string($conn, $_POST['category']);
+            $descr = mysqli_real_escape_string($conn, $_POST['descr']);
+            $price = mysqli_real_escape_string($conn, $_POST['price']);
 
             // Lógica de la carga de imagen
             if (!empty($_FILES["image"]["name"])) {
@@ -48,7 +57,7 @@ if (isset($_GET['id'])) {
             $update_result = $conn->query($update_query);
 
             if ($update_result) {
-                $success_msg = "Item actualizado éxitosamente";
+                $success_msg = "Item actualizado exitosamente";
                 header("Location: success.php?success_msg=" . urlencode($success_msg));
                 exit();
             } else {
@@ -65,7 +74,7 @@ if (isset($_GET['id'])) {
             $delete_result = $conn->query($delete_query);
 
             if ($delete_result) {
-                $success_msg = "Item eliminado éxitosamente";
+                $success_msg = "Item eliminado exitosamente";
                 header("Location: success.php?success_msg=" . urlencode($success_msg));
                 exit();
             } else {
@@ -105,7 +114,7 @@ if (isset($_GET['id'])) {
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
-            <a class="navbar-brand" href="index.html" title="Inicio">La Feria de Potrero &#x1F4B8;&#x1F91D;&#x1F381;</a>
+            <a class="navbar-brand" href="index.php" title="Inicio">La Feria de Potrero &#x1F4B8;&#x1F91D;&#x1F381;</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -117,10 +126,13 @@ if (isset($_GET['id'])) {
 
                     <ul class="navbar-nav mr-3">
                         <li class="nav-item">
-                            <a class="nav-link" href="./about.html">Acerca de</a>
+                            <a class="nav-link" href="about.php">Acerca de</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login_register_form.html">Acceder / Registrarse</a>
+                            <span class="nav-link" style="color:white;">|</span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout.php">Cerrar sesión</a>
                         </li>
                     </ul>
 
@@ -219,7 +231,7 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
 
-            <a href="index.html" class="back">◄ Volver al Inicio</a>
+            <a href="index.php" class="back">◄ Volver al Inicio</a>
         </main>
 
         <footer class="footer bg-primary text-white text-center p-2 mt-auto p-4">
@@ -243,7 +255,7 @@ if (isset($_GET['id'])) {
                 successMessageDiv.style.display = 'block';
             }
             document.getElementById('image').addEventListener('change', function () {
-                showSuccessMessage('Imagen cargada éxitosamente.');
+                showSuccessMessage('Imagen cargada exitosamente.');
             });
         </script>
         <!-- JS para la confirmación de la eliminación -->

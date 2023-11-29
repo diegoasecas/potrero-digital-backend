@@ -1,3 +1,5 @@
+<!-- logout.php -->
+
 <?php
 session_start();
 
@@ -8,6 +10,7 @@ $_SESSION = array();
 session_destroy();
 
 // Redirige a la pág. ppal.
-header("Location: index.php");
-exit();
+$success_msg = "Has cerrado sesión exitosamente";
+        header("Location: success.php?success_msg=" . urlencode($success_msg));
+        exit();
 ?>

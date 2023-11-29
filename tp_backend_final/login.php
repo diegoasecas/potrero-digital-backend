@@ -1,3 +1,5 @@
+<!-- login.php -->
+
 <?php
 session_start();
 require_once('db_connection.php');
@@ -22,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['is_admin'] = $user['admin'] == 1;
 
         // Redirige a la pag de mensaje
-        $success_msg = "Login éxitoso";
+        $success_msg = "Login exitoso";
         header("Location: success.php?success_msg=" . urlencode($success_msg));
         exit();
 

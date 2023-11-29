@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // redirige a la pág. ppal.
         header("Refresh:4; url=index.php");
-        echo "<h2>Login éxitoso!</h2>";
+        echo "<h2>Login exitoso!</h2>";
         echo "<p class=''>Bienvenido, " . $_SESSION['name'] . "! En unos segundos será redirigido a la <a href='index.php'>página principal</a>.</p>";
         exit();
     } else {

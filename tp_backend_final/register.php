@@ -1,3 +1,5 @@
+<!-- register.php -->
+
 <?php
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
@@ -17,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $conn->query($query);
 
     if ($result) {
-        $success_msg = "Registro éxitoso";
+        $success_msg = "Registro exitoso";
         header("Location: success.php?success_msg=" . urlencode($success_msg));
         exit();
     } else {

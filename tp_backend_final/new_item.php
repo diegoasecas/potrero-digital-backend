@@ -1,6 +1,14 @@
+<!-- new_item.php -->
+
 <?php
 session_start();
 require_once('db_connection.php');
+
+// Verifica si el usuario está logueado y si no lo está redirecciona a la página dde login
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login_register_form.php");
+    exit();
+}
 
 // Define las categorías disponibles
 $predefinedCategories = [
@@ -17,11 +25,13 @@ $predefinedCategories = [
 
 // Lógica del formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
-    $category = $_POST['category'];
-    $descr = $_POST['descr'];
-    $price = $_POST['price'];
-    $uploader = $_SESSION['user_id'];
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $category = mysqli_real_escape_string($conn, $_POST['category']);
+    $descr = mysqli_real_escape_string($conn, $_POST['descr']);
+    $price = mysqli_real_escape_string($conn, $_POST['price']);
+    $uploader = mysqli_real_escape_string($conn, $_SESSION['user_id']);
+
+
 
     // Asigna variables para la carga de imágenes
     $target_dir = './uploads/';
@@ -66,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
-            <a class="navbar-brand" href="index.html" title="Inicio">La Feria de Potrero &#x1F4B8;&#x1F91D;&#x1F381;</a>
+            <a class="navbar-brand" href="index.php" title="Inicio">La Feria de Potrero &#x1F4B8;&#x1F91D;&#x1F381;</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,10 +88,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <ul class="navbar-nav mr-3">
                         <li class="nav-item">
-                            <a class="nav-link" href="./about.html">Acerca de</a>
+                            <a class="nav-link" href="about.php">Acerca de</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login_register_form.html">Acceder / Registrarse</a>
+                            <span class="nav-link" style="color:white;">|</span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout.php">Cerrar sesión</a>
                         </li>
                     </ul>
 
@@ -167,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
 
-            <a href="index.html" class="back">◄ Volver al Inicio</a>
+            <a href="index.php" class="back">◄ Volver al Inicio</a>
         </main>
 
         <footer class="footer bg-primary text-white text-center p-2 mt-auto p-4">
@@ -191,7 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 successMessageDiv.style.display = 'block';
             }
             document.getElementById('image').addEventListener('change', function () {
-                showSuccessMessage('Imagen cargada éxitosamente.');
+                showSuccessMessage('Imagen cargada exitosamente.');
             });
         </script>
     </body>
